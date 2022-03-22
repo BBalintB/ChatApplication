@@ -7,6 +7,25 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <ListBox Grid.Row="0" >
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <Label Content="Asd" FontSize="15" Padding="10" />
+                        <Label Content="Asd" FontSize="15" Padding="10" />
+                        <Label Content="Asd" FontSize="15" Padding="10" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <TextBox Grid.Row="1" x:Name="tb_nev" />
+        <TextBox Grid.Row="2" x:Name="tb_msg" />
+        <Button Grid.Row="3" Content="Send" Padding="1" />
     </Grid>
 </Window>
