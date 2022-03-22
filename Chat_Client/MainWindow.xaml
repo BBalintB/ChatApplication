@@ -4,8 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Chat_Client"
+        
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <local:MainWindowViewModel />
+    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="10*"/>
@@ -13,19 +17,19 @@
             <RowDefinition Height="2*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <ListBox Grid.Row="0" >
+        <ListBox Grid.Row="0" ItemsSource="{Binding Messages}" >
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
-                        <Label Content="Asd" FontSize="15" Padding="10" />
-                        <Label Content="Asd" FontSize="15" Padding="10" />
-                        <Label Content="Asd" FontSize="15" Padding="10" />
+                        <Label Content="{Binding Name}" FontSize="15" Padding="10" />
+                        <Label Content="{Binding Date}" FontSize="15" Padding="10" />
+                        <Label Content="{Binding Content}" FontSize="15" Padding="10" />
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <TextBox Grid.Row="1" x:Name="tb_nev" />
-        <TextBox Grid.Row="2" x:Name="tb_msg" />
-        <Button Grid.Row="3" Content="Send" Padding="1" />
+        <TextBox Grid.Row="1" Text="{Binding MSG.Name}"/>
+        <TextBox Grid.Row="2" Text="{Binding MSG.Content}" />
+        <Button Grid.Row="3" Command="{Binding Send}" Content="Send" Padding="1" />
     </Grid>
 </Window>

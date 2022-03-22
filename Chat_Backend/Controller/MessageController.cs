@@ -1,5 +1,6 @@
 ﻿using Chat_Backend.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,18 @@ using System.Threading.Tasks;
 
 namespace Chat_Backend.Controller
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class MessageController : ControllerBase
     {
-        Logic logic = new Logic();
+        Logic logic;
+        IHubContext<SignalRHub> hub;
+
+        public MessageController(Logic logic, IHubContext<SignalRHub> hub)
+        {
+            this.logic = logic;
+            this.hub = hub;
+        }
         // GET: api/<ValuesController>
         [HttpGet]
         public IEnumerable<Message> Get()
@@ -30,9 +38,11 @@ namespace Chat_Backend.Controller
 
         // POST api/<ValuesController>
         [HttpPost]
-        public void Post(Message message)
+        public void Post([FromBody]Message message)
         {
+            ;
             logic.Post(message);
+            this.hub.Clients.All.SendAsync("MessageCreated", message);
         }
 
         // PUT api/<ValuesController>/5
