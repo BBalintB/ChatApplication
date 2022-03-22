@@ -20,7 +20,8 @@ namespace Chat_Backend
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>();
+                    webBuilder.UseStartup<Startup>().UseUrls("http://*:22222");
+                    
                 });
     }
 }
